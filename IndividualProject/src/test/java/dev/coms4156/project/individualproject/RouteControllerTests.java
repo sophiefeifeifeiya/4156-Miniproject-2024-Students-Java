@@ -14,6 +14,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * This class contains tests for the RouteController class.
+ */
 @WebMvcTest(controllers = RouteController.class)
 public class RouteControllerTests {
 
@@ -32,19 +35,22 @@ public class RouteControllerTests {
     mockMvc.perform(get("/"))
             .andExpect(status().isOk())
             .andExpect(content()
-                    .string("Welcome, in order to make an API call direct your browser or Postman to an endpoint "
+                    .string("Welcome, in order to make an API call "
+                            + "direct your browser or Postman to an endpoint "
                             + "\n\n This can be done using the following format: \n\n http:127.0.0"
                             + ".1:8080/endpoint?arg=value"));
     mockMvc.perform(get("/index"))
             .andExpect(status().isOk())
             .andExpect(content()
-                    .string("Welcome, in order to make an API call direct your browser or Postman to an endpoint "
+                    .string("Welcome, in order to make an API call "
+                            + "direct your browser or Postman to an endpoint "
                             + "\n\n This can be done using the following format: \n\n http:127.0.0"
                             + ".1:8080/endpoint?arg=value"));
     mockMvc.perform(get("/home"))
             .andExpect(status().isOk())
             .andExpect(content()
-                    .string("Welcome, in order to make an API call direct your browser or Postman to an endpoint "
+                    .string("Welcome, in order to make an API call "
+                            + "direct your browser or Postman to an endpoint "
                             + "\n\n This can be done using the following format: \n\n http:127.0.0"
                             + ".1:8080/endpoint?arg=value"));
   }
