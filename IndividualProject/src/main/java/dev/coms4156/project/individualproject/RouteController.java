@@ -95,6 +95,39 @@ public class RouteController {
   }
 
   /**
+   * Returns the String representation of all courses with the specified course code across departments.
+   *
+   * @param courseCode A {@code int} representing the course the user wishes
+   *                   to retrieve across departments.
+   *
+   * @return A {@code ResponseEntity} object containing a readable string representation of all
+   *         matching courses or a message indicating no courses were found.
+   */
+  @GetMapping(value = "/retrieveCourses", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> retrieveCourses(
+          @RequestParam(value = "courseCode") int courseCode) {
+    try {
+      HashMap<String, Department> departmentMapping;
+      departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
+      StringBuilder result = new StringBuilder();
+      boolean courseFound = false;
+      for (String deptCode : departmentMapping.keySet()) {
+        ResponseEntity<?> courseResponse = retrieveCourse(deptCode, courseCode);
+        if (courseResponse.getStatusCode() == HttpStatus.OK) {
+          result.append(deptCode).append(" ").append(courseCode).append("\n");
+          courseFound = true;
+        }
+      }
+      if (!courseFound) {
+        return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
+      }
+      return new ResponseEntity<>(result.toString().trim(), HttpStatus.OK);
+    } catch (Exception e) {
+      return handleException(e);
+    }
+  }
+
+  /**
    * Displays whether the course has at minimum reached its enrollmentCapacity.
    *
    * @param deptCode   A {@code String} representing the department the user wishes
