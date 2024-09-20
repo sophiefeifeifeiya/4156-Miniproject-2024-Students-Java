@@ -398,6 +398,44 @@ public class RouteController {
   }
 
   /**
+   * Enrolls a student in a course specified by department and course code.
+   *
+   * @param deptCode   A {@code String} representing the department the course belongs to.
+   * @param courseCode A {@code int} representing the course code the student wishes to enroll in.
+   *
+   * @return A {@code ResponseEntity} object containing an appropriate message indicating the result.
+   */
+  @PatchMapping(value = "/enrollStudentInCourse", produces = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<?> enrollStudentInCourse(
+          @RequestParam(value = "deptCode") String deptCode,
+          @RequestParam(value = "courseCode") int courseCode) {
+    try {
+      boolean doesCourseExists;
+      doesCourseExists = retrieveCourse(deptCode, courseCode).getStatusCode() == HttpStatus.OK;
+
+      if (doesCourseExists) {
+        HashMap<String, Department> departmentMapping;
+        departmentMapping = IndividualProjectApplication.myFileDatabase.getDepartmentMapping();
+        HashMap<String, Course> coursesMapping;
+        coursesMapping = departmentMapping.get(deptCode).getCourseSelection();
+
+        Course requestedCourse = coursesMapping.get(Integer.toString(courseCode));
+        boolean isStudentEnrolled = requestedCourse.enrollStudent();
+
+        if (isStudentEnrolled) {
+          return new ResponseEntity<>("Student has been enrolled.", HttpStatus.OK);
+        } else {
+          return new ResponseEntity<>("Student has not been enrolled.", HttpStatus.BAD_REQUEST);
+        }
+      } else {
+        return new ResponseEntity<>("Course Not Found", HttpStatus.NOT_FOUND);
+      }
+    } catch (Exception e) {
+      return handleException(e);
+    }
+  }
+
+  /**
    * setEnrollmentCount.
    *
    * @param deptCode                    the code of the department containing the course
