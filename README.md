@@ -12,8 +12,8 @@ Analysis results in the `target/pmd.xml` file
 
 ## How to check style
 ```
-mvn checkstyle:check
 mvn spring-boot:run -Dspring-boot.run.arguments="setup"
+mvn checkstyle:check
 ```
 ## How to run tests
 ```

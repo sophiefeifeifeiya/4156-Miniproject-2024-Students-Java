@@ -95,7 +95,8 @@ public class RouteController {
   }
 
   /**
-   * Returns the String representation of all courses with the specified course code across departments.
+   * Returns the String representation of all courses with
+   * the specified course code across departments.
    *
    * @param courseCode A {@code int} representing the course the user wishes
    *                   to retrieve across departments.
@@ -434,9 +435,11 @@ public class RouteController {
    * Enrolls a student in a course specified by department and course code.
    *
    * @param deptCode   A {@code String} representing the department the course belongs to.
-   * @param courseCode A {@code int} representing the course code the student wishes to enroll in.
+   * @param courseCode A {@code int} representing the course code
+   *                   the student wishes to enroll in.
    *
-   * @return A {@code ResponseEntity} object containing an appropriate message indicating the result.
+   * @return           A {@code ResponseEntity} object containing
+   *                   an appropriate message indicating the result.
    */
   @PatchMapping(value = "/enrollStudentInCourse", produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<?> enrollStudentInCourse(

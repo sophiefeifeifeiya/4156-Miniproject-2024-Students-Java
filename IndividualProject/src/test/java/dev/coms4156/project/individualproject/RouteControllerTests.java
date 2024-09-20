@@ -103,6 +103,31 @@ public class RouteControllerTests {
   }
 
   @Test
+  public void retrieveCoursesNotFoundTest() throws Exception {
+    mockMvc.perform(get("/retrieveCourses")
+                    .param("courseCode", "1111"))
+            .andExpect(status().isNotFound())
+            .andExpect(content().string("Course Not Found"));
+    mockMvc.perform(get("/retrieveCourses")
+                    .param("error", "COMS"))
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void retrieveCoursesFoundTest() throws Exception {
+    mockMvc.perform(get("/retrieveCourses")
+                    .param("courseCode", "4102"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(org.hamcrest.Matchers.containsString("CHEM 4102")))
+            .andExpect(content().string(org.hamcrest.Matchers.containsString("IEOR 4102")));
+    mockMvc.perform(get("/retrieveCourses")
+                    .param("courseCode", "1001"))
+            .andExpect(status().isOk())
+            .andExpect(content().string(org.hamcrest.Matchers.containsString("PSYC 1001")))
+            .andExpect(content().string(org.hamcrest.Matchers.containsString("PHYS 1001")));
+  }
+
+  @Test
   public void isCourseFullTest() throws Exception {
     mockMvc.perform(get("/isCourseFull")
                     .param("deptCode", "IEOR")
@@ -292,6 +317,27 @@ public class RouteControllerTests {
             .andExpect(status().isNotFound())
             .andExpect(content().string("Course Not Found"));
     mockMvc.perform(patch("/dropStudentFromCourse")
+                    .param("error", "COMS"))
+            .andExpect(status().isBadRequest());
+  }
+
+  @Test
+  public void enrollStudentTest() throws Exception {
+    mockMvc.perform(patch("/enrollStudentInCourse")
+                    .param("deptCode", "COMS")
+                    .param("courseCode", "1004"))
+            .andExpect(status().isOk())
+            .andExpect(content().string("Student has been enrolled."));
+  }
+
+  @Test
+  public void enrollStudentFailTest() throws Exception {
+    mockMvc.perform(patch("/enrollStudentInCourse")
+                    .param("deptCode", "IEOR")
+                    .param("courseCode", "2500"))
+            .andExpect(status().isBadRequest())
+            .andExpect(content().string("Student has not been enrolled."));
+    mockMvc.perform(patch("/enrollStudentInCourse")
                     .param("error", "COMS"))
             .andExpect(status().isBadRequest());
   }
