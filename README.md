@@ -18,5 +18,6 @@ mvn spring-boot:run -Dspring-boot.run.arguments="setup"
 ## How to run tests
 ```
 mvn spring-boot:run -Dspring-boot.run.arguments="setup"
-mvn clean test
+mvn clean test jacoco:report
 ```
+Test results in the `target/site/jacoco`
