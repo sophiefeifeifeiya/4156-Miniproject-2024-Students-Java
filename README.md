@@ -2,10 +2,10 @@
 
 This is the GitHub repository for an individual project of COMS4156 Advanced Software Engineering.
 
-# Viewing original assignment repo
+## Viewing original assignment repo
 This project is forked from https://github.com/Programming-Systems-Lab/4156-Miniproject-2024-Students-Java
 
-# Building and Running a Local Instance
+## Building and Running a Local Instance
 In order to build and use our service you must install the following (This guide assumes Mac):
 
 1. Maven 3.9.5: https://maven.apache.org/download.cgi
@@ -18,16 +18,16 @@ In order to build and use our service you must install the following (This guide
 
 Our endpoints are listed below in the "Endpoints" section, with brief descriptions of their parameters.
 
-# Running a Cloud based Instance
+## Running a Cloud based Instance
 I have deployed the service to Google Cloud Platform. You can access the service at https://my-project-4156-436813.ue.r.appspot.com/
 
-# Running Tests
+## Running Tests
 All the test file are under the directory 'src/test'.
 
 1. Tests can be run with ```mvn clean test jacoco:report``` in terminal.
 2. The coverage report is in the target/site/jacoco directory.
 
-# Endpoints
+## Endpoints
 
 **GET/retrieveDept**
 - Parameters: deptCode (String)
@@ -132,28 +132,28 @@ All the test file are under the directory 'src/test'.
 - Upon Failure: HTTP 404 Status Code with "Course Not Found" if it doesn't exist.
 
 
-# Style Checking Report
+## Style Checking Report
 The style checking report is in the `target/pmd.xml` file.
 If there is no report, run ```mvn checkstyle:check``` to generate the report.
 Here is the report as of the day of 09/27/24:
 ![Screenshot of a checkstyle with no errors](reports/check-style.png)
 
-# Branch Coverage Reporting
+## Branch Coverage Reporting
 The branch coverage report is in the `target/site/jacoco` directory.
 If there is no report, run ```mvn clean test jacoco:report``` to generate the report.
 Here is the report as of the day of 09/27/24:
 ![Screenshot of a branch coverage report](reports/branch-coverage.png)
 
-# Static Analysis Report
+## Static Analysis Report
 The static analysis report is in the `target/pmd.xml` file.
 If there is no report, run ```mvn pmd:check``` to generate the report.
 Here is the report as of the day of 09/27/24:
 ![Screenshot of a static analysis report](reports/static-analysis.png)
 
-# Continuous Integration Report
+## Continuous Integration Report
 This repository using GitHub Actions to perform continous integration, to view the latest results go to the following link: https://github.com/sophiefeifeifeiya/Private-4156-Miniproject-2024-Students-Java/blob/main/.github/workflows/maven.yml
 
-# Tools 
+## Tools 
 - IntelliJ IDEA
 - Maven
 - Spring Boot
