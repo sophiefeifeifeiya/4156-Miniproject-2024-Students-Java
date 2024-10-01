@@ -1,4 +1,4 @@
-# Indicidual Project for 4156
+# Individual Project for 4156
 
 This is the GitHub repository for an individual project of COMS4156 Advanced Software Engineering.
 
